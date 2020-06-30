@@ -24,24 +24,38 @@ function criarCobrinha(){
 
  }
 }
+ document.addEventListener("keydown", update);
+ function update (event){
+
+    if(event.keycode == 37 && direction != "right") direction = "left";
+    if(event.keycode == 38 && direction != "down")  direction =  "up";
+    if(event.keycode == 39 && direction != "left")  direction = "right";
+    if(event.keycode == 40 && direction != "up")    direction = "down";
+}
 
 function iniciarJogo(){
+
+    if(snake[0].x > 15 * box && direction == "right") snake [0].x = 0;
+    if(snake[0].x < 0 && direction == "left" ) snake[0].x = 16 * box;
+    if(snake[0].y > 15 * box && direction == "down" ) snake[0].y = 0;
+    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box;
+
 criarBG();
 criarCobrinha();
 
-let snakeX = snake[0].x;
-let snakeY = snake[0].Y;
+let snakex = snake[0].x;
+let snakey = snake[0].y;
 
-if(direction == "rigth") snakeX += box;
-if(direction =="left") snakeX -= box;
-if(direction == "up") snakeY -= box;
-if(direction == "down") snakeY += box;
+if(direction == "right") snakex += box;
+if(direction =="left") snakex -= box;
+if(direction == "up") snakey -= box;
+if(direction == "down") snakey += box;
 
 snake.pop();
 
 let newHead ={
-    x: snakeX,
-    y: snakeY
+    x: snakex,
+    y: snakey
 
 }
 snake.unshift(newHead);
